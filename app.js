@@ -80,6 +80,7 @@ document.getElementById("requestForm").addEventListener("submit", async function
 // Below is the IndexedDB code to save the request data, and a helper function to convert images to base64 format for storage.
 
 // IndexedDB
+// This function takes the request data object and saves it to the "requests" object store in IndexedDB. It uses a transaction to perform the operation, and handles success and error cases to provide feedback to the user.
 function saveRequest(data){
 
     const tx = db.transaction("requests", "readwrite");
@@ -99,6 +100,7 @@ function saveRequest(data){
 }
 
 // Convert images to base64
+// This function takes a file object (representing an uploaded image) and returns a Promise that resolves to the base64 representation of the file. It uses the FileReader API to read the file as a data URL, which is a base64 encoded string that can be stored in IndexedDB.
 function toBase64(file){
 
     return new Promise((resolve,reject)=>{
