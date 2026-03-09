@@ -18,6 +18,7 @@ request.onupgradeneeded = function(event) {
 request.onsuccess = function(event) {
     db = event.target.result;
     console.log("Database ready");
+    loadRequests();
 };
 
 // On error, we log the error to the console.
@@ -33,16 +34,52 @@ if (submitBtn)  {
     });
 }
 
+// This function loads all requests from the "requests" object store in IndexedDB and displays the newest request on the page.
+// It retrieves all requests, sorts them by creation date, and updates the first request card with the details of the newest request.
 function loadRequests() {
 
+    // Creates a transaction to read from the "requests" object store and get all requests.
     const tx = db.transaction("requests", "readonly");
+    // Access the "requests" object store and get all requests.
     const store = tx.objectStore("requests");
+    // Request to get all requests from the store.
     const getRequests = store.getAll();
 
-    getAll.onsuccess = function() {
+    // When the request to get all requests is successful, process the results to display the newest request on the page.
+    getRequests.onsuccess = function() {
+
+        const requests = getRequests.result;
+
+        if (!requests.length) return;
+
+        // Sort newest first
+        requests.sort((a, b) => new Date(b.created) - new Date(a.created));
+
+        const newest = requests[0];
+
         const grid = document.getElementById("requestGrid");
         if (!grid) return;
-        grid.innerHTML = "";
+
+        const firstCard = grid.querySelector(".request-card");
+
+        if (!firstCard) return;
+
+        firstCard.querySelector(".card-title").textContent = newest.title;
+        firstCard.querySelector(".card-description").textContent = newest.description;
+
+        const contact = firstCard.querySelector(".contact-details");
+
+        if (contact) {
+            contact.innerHTML = `<p>Email: ${newest.email}</p>`;
+        }
+
+        const imageDiv = firstCard.querySelector(".card-image");
+
+        if (newest.images.length > 0) {
+            imageDiv.style.backgroundImage = `url(${newest.images[0]})`;
+            imageDiv.style.backgroundSize = "cover";
+            imageDiv.style.backgroundPosition = "center";
+        }
     };
 }
 // Form submission handler to save the request data to IndexedDB.
@@ -146,5 +183,20 @@ function toBase64(file){
         reader.onerror = error => reject(error);
 
     });
+
+}
+
+// This function clears all requests from the "requests" object store in IndexedDB.
+// Use clearRequests(); to clear all requests from the database.
+function clearRequests() {
+
+    const tx = db.transaction("requests", "readwrite");
+    const store = tx.objectStore("requests");
+
+    const clearRequest = store.clear();
+
+    clearRequest.onsuccess = function() {
+        console.log("All requests cleared");
+    };
 
 }
