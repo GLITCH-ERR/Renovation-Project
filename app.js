@@ -26,11 +26,32 @@ request.onerror = function() {
     console.log("Database error");
 };
 
+const submitBtn = document.getElementById("btn-submit-request");
+if (submitBtn)  {
+    submitBtn.addEventListener("click", function() {
+        window.location.href = "requestForm.html";
+    });
+}
+
+function loadRequests() {
+
+    const tx = db.transaction("requests", "readonly");
+    const store = tx.objectStore("requests");
+    const getRequests = store.getAll();
+
+    getAll.onsuccess = function() {
+        const grid = document.getElementById("requestGrid");
+        if (!grid) return;
+        grid.innerHTML = "";
+    };
+}
 // Form submission handler to save the request data to IndexedDB.
 // It also handles image uploads and converts them to base64 format for storage.
 
-document.getElementById("requestForm").addEventListener("submit", async function(e){
-
+ // document.getElementById("requestForm").addEventListener("submit", async function(e){
+const form = document.getElementById("requestForm");
+if (form) {
+    form.addEventListener("submit", async function(e){
     // Prevent the default form submission behavior to handle it with JavaScript.
     e.preventDefault();
 
@@ -74,6 +95,7 @@ document.getElementById("requestForm").addEventListener("submit", async function
     saveRequest(data);
 
 });
+}
 
 // Below is the IndexedDB code to save the request data, and a helper function to convert images to base64 format for storage.
 
@@ -96,6 +118,19 @@ function saveRequest(data){
     };
 
 }
+const contactBtns = document.querySelectorAll(".btn-contact");
+contactBtns.forEach(function(btn){
+    btn.addEventListener("click", function(){
+        const details = this.nextElementSibling;
+        if(details.style.display === "none"){
+            details.style.display = "block";
+            this.textContent = "Hide Contact";
+        } else {
+            details.style.display = "none";
+            this.textContent = "Contact";
+        }
+    });
+});
 
 // Convert images to base64
 // This function takes a file object (representing an uploaded image) and returns a Promise that resolves to the base64 representation of the file. It uses the FileReader API to read the file as a data URL, which is a base64 encoded string that can be stored in IndexedDB.

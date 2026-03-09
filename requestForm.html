@@ -6,34 +6,68 @@
         <meta charset="UTF-8">
         <title>Submit Renovation Request</title>
         <style>
-            body{
-                font-family: Arial;
-                margin:40px;
+            body {
+                font-family: sans-serif;
+                margin: 0;
+                padding: 40px 20px;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: #f9f9f9;
             }
-
-            form{
-                max-width:600px;
+            .form-container {
+                margin: 40px 20px;
             }
-
-            input, select, textarea{
-                width:100%;
-                padding:8px;
-                margin:10px 0;
+            footer {
+                margin-top: auto;
+                padding: 16px 32px;
+                border-top: 1px solid #ccc;
+                width: 100%;
             }
-
-            button{
-                padding:10px 20px;
-                cursor:pointer;
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 24px;
             }
-
-            #status{
-                margin-top:15px;
-                font-weight:bold;
+            label {
+                font-size: 0.85rem;
+                font-weight: 600;
+                display: block;
+                margin-bottom: 4px;
+                margin-top: 16px;
+            }
+            input, select, textarea {
+                width: 100%;
+                padding: 10px;
+                font-size: 0.9rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-family: sans-serif;
+            }
+            textarea {
+                resize: vertical;
+            }
+            button[type="submit"] {
+                margin-top: 24px;
+                padding: 12px 32px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                cursor: pointer;
+                background: #1a1a1a;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+            }
+            #status {
+                margin-top: 16px;
+                font-weight: 600;
+                font-size: 0.85rem;
             }
         </style>
     </head>
 
     <body>
+        <div class="form-container">
         <h1>Submit Renovation Request</h1>
 
         <form id="requestForm">
@@ -66,6 +100,12 @@
         </form>
 
         <div id="status"></div>
+        </div>
+       
+       
+        <footer>
+			<small>Ace Contract CS324</small>
+		</footer>
 
         <script src="app.js"></script>
     </body>
