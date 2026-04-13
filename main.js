@@ -10,9 +10,10 @@ export async function init() {
         const data = await loadRequests();
         state.requests = data;
     } catch (err) {
-        
+        state.error = err.message;
     } finally {
-        
+        state.isLoading = false;
+        render();
     }
 }
 
