@@ -1,5 +1,6 @@
 import { DATA_URL, isValidRequest, state } from "./state.js";
- 
+import { db } from "../app.js";
+
 const TIMEOUT_MS = 8000;
  
 export async function loadRequests(render) {
@@ -32,4 +33,19 @@ export async function loadRequests(render) {
     state.isLoading = false;
     render();
   }
+}
+
+// This function clears all requests from the "requests" object store in IndexedDB.
+// Use clearRequests(); to clear all requests from the database.
+export function clearRequests() {
+
+    const tx = db.transaction("requests", "readwrite");
+    const store = tx.objectStore("requests");
+
+    const clearRequest = store.clear();
+
+    clearRequest.onsuccess = function() {
+        console.log("All requests cleared");
+    };
+
 }

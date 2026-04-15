@@ -8,4 +8,5 @@ export const dom = {
     errorMsg: document.querySelector("#errorMsg"),
     retryBtn: document.querySelector("#retryBtn"),
     emptyEl: document.querySelector("#empty"),
+    clearBtn: document.querySelector("#clear-btn"),
   };

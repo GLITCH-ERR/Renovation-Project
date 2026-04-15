@@ -1,20 +1,34 @@
-import { loadRequests } from "./api.js";
+import { loadRequests, clearRequests } from "./api.js";
 import { render } from "./render.js";
 import { state } from "./state.js";
+import { dom } from "./dom.js";
+
+export function retry() {
+    loadRequests(render);
+}
 
 export async function init() {
-    state.isLoading = true;
-    render();
-
-    try {
-        const data = await loadRequests();
-        state.requests = data;
-    } catch (err) {
-        state.error = err.message;
-    } finally {
-        state.isLoading = false;
-        render();
-    }
+    loadRequests(render);
 }
+
+if (dom.clearBtn) {
+    dom.clearBtn.addEventListener("click", () => {
+        clearRequests();
+
+        // update UI immediately
+        state.requests = [];
+        render();
+    });
+}
+
+dom.searchInput.addEventListener("input", (e) => {
+    state.query = e.target.value;
+    render();
+});
+
+dom.filterSelect.addEventListener("change", (e) => {
+    state.activeFilter = e.target.value;
+    render();
+});
 
 init();

@@ -1,6 +1,7 @@
-import { state, getSortedRequests } from "./state.js";
+import { state, getSortedRequests, getErrorDisplay } from "./state.js";
 import { dom } from "./dom.js";
 import { RequestCard } from "./components/RequestCard.js";
+import { retry } from "./main.js";
 
 export function render() {
     dom.grid.replaceChildren();
@@ -12,11 +13,12 @@ export function render() {
 
     if (state.error) {
         const div = document.createElement("div");
-        div.textContent = state.error;
+        const { message } = getErrorDisplay(state.error);
+        div.textContent = message;
 
         const btn = document.createElement("button");
         btn.textContent = "Retry";
-        btn.onclick = () => location.reload();
+        btn.onclick = () => retry();
 
         dom.grid.append(div, btn);
         return;
