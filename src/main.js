@@ -3,6 +3,12 @@ import { render } from "./render.js";
 import { state } from "./state.js";
 import { dom } from "./dom.js";
 
+if (dom.submitBtn) {
+    dom.submitBtn.addEventListener("click", () => {
+        window.location.href = "requestForm.html";
+    });
+}
+
 export function retry() {
     loadRequests(render);
 }
