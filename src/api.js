@@ -38,6 +38,11 @@ export async function loadRequests(render) {
 
 function getIndexedDBRequests() {
   return new Promise((resolve) => {
+    if (!db) {
+      resolve([]);
+      return;
+    }
+    
     const tx = db.transaction("requests", "readonly");
     const store = tx.objectStore("requests");
     const req = store.getAll();
