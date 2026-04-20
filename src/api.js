@@ -24,8 +24,9 @@ export async function loadRequests(render) {
     const json = await response.json();
     const rawRequests = Array.isArray(json.requests) ? json.requests : [];
     const validRequests = rawRequests.filter(isValidRequest);
+    const dbRequests = await getIndexedDBRequests();
  
-    state.requests = validRequests;
+    state.requests = [...validRequests, ...dbRequests];
   } catch (err) {
     state.error = err;
   } finally {
@@ -33,6 +34,17 @@ export async function loadRequests(render) {
     state.isLoading = false;
     render();
   }
+}
+
+function getIndexedDBRequests() {
+  return new Promise((resolve) => {
+    const tx = db.transaction("requests", "readonly");
+    const store = tx.objectStore("requests");
+    const req = store.getAll();
+
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror = () => resolve([]);
+  });
 }
 
 // This function clears all requests from the "requests" object store in IndexedDB.
