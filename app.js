@@ -84,6 +84,11 @@ if (form) {
 // This function takes the request data object and saves it to the "requests" object store in IndexedDB. It uses a transaction to perform the operation, and handles success and error cases to provide feedback to the user.
 function saveRequest(data){
 
+    if (!db) {
+        alert("Database not ready. Try again.");
+        return;
+    }
+
     const tx = db.transaction("requests", "readwrite");
     const store = tx.objectStore("requests");
 
