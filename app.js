@@ -95,6 +95,10 @@ function saveRequest(data){
     tx.oncomplete = function(){
         document.getElementById("status").innerText = "Request successfully saved!";
         document.getElementById("requestForm").reset();
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 1000);
     };
 
     tx.onerror = function(){
