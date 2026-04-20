@@ -27,10 +27,12 @@ if (dom.clearBtn) {
     });
 }
 
-dom.searchInput.addEventListener("input", (e) => {
-    state.query = e.target.value;
-    render();
-});
+if (dom.searchInput) {
+    dom.searchInput.addEventListener("input", (e) => {
+        state.query = e.target.value;
+        render();
+    });
+}
 
 dom.filterSelect.addEventListener("change", (e) => {
     state.activeFilter = e.target.value;
