@@ -26,7 +26,13 @@ export async function loadRequests(render) {
     const validRequests = rawRequests.filter(isValidRequest);
     const dbRequests = await getIndexedDBRequests();
  
-    state.requests = [...validRequests, ...dbRequests];
+    const all = [...validRequests, ...dbRequests];
+
+    const unique = Array.from(
+      new Map(all.map(r => [r.id, r])).values()
+    );
+
+    state.requests = unique;
   } catch (err) {
     state.error = err;
   } finally {
