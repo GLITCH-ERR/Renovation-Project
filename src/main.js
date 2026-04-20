@@ -34,9 +34,11 @@ if (dom.searchInput) {
     });
 }
 
-dom.filterSelect.addEventListener("change", (e) => {
-    state.activeFilter = e.target.value;
-    render();
-});
+if (dom.filterSelect) {
+    dom.filterSelect.addEventListener("change", (e) => {
+        state.activeFilter = e.target.value;
+        render();
+    });
+}
 
 init();
