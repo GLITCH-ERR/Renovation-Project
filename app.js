@@ -93,7 +93,7 @@ function saveRequest(data){
     store.add(data);
 
     tx.oncomplete = function(){
-        document.getElementById("status").innerText = "Request successfully saved!";
+        document.getElementById("status").innerText = "Request successfully saved! Loading back to homepage...";
         document.getElementById("requestForm").reset();
 
         setTimeout(() => {
