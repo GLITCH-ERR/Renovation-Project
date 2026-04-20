@@ -1,5 +1,5 @@
 # Renovation-Project
----
+--------------------
 ## Purpose
 An eBay/Craigslist-inspired website for homeowners to post renovation requests for contractors.
 
@@ -34,7 +34,7 @@ Visit http://localhost:4040
 - `state.js` — stores global state and provides filtering/sorting selectors
 - `render.js` — renders UI based on current state
 - `dom.js` — centralizes DOM element references
-- `components/RequestCard.js` — reusable UI component for displaying a request
+- `src/components/RequestCard.js` — reusable UI component for displaying a request
 - `app.js` — handles IndexedDB setup and form submission logic
 
 ## Technologies
