@@ -27,7 +27,7 @@ export function render() {
     const data = getSortedRequests();
 
     if (data.length === 0) {
-        dom.grid.textContent = "No requests found.";
+        dom.grid.textContent = "No requests found. Try adjusting your search or filter.";
         return;
     }
 
