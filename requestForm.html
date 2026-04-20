@@ -5,16 +5,21 @@
     <head>
         <meta charset="UTF-8">
         <title>Submit Renovation Request</title>
+        <link rel="stylesheet" href="styles.css"/>
         <style>
             body {
                 font-family: sans-serif;
                 margin: 0;
-                padding: 40px 20px;
+                padding: 0;
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 background: #f9f9f9;
+            }
+            header {
+                width: 100%;
+                align-self: stretch;
             }
             .form-container {
                 margin: 40px 20px;
@@ -67,20 +72,23 @@
     </head>
 
     <body>
+        <header>
+            <a href="index.html" class="site-title" style="text-decoration:none;color:inherit;">Ace Contract</a>
+            </header>
         <div class="form-container">
         <h1>Submit Renovation Request</h1>
 
         <form id="requestForm">
-            <label>Project Title</label>
+            <label for="title">Project Title</label>
             <input type="text" id="title" required>
 
-            <label>Zip Code</label>
+            <label for="zip">Zip Code</label>
             <input type="text" id="zip" pattern="[0-9]{5}" required>
 
-            <label>Email Address</label>
+            <label for="email">Email Address</label>
             <input type="email" id="email" required>
 
-            <label>Category</label>
+            <label for="category">Category</label>
             <select id="category" required>
                 <option value="">Select a category</option>
                 <option value="drywall">Drywall</option>
@@ -88,12 +96,13 @@
                 <option value="flooring">Flooring</option>
                 <option value="roofing">Roofing</option>
                 <option value="kitchen">Kitchen</option>
+                <option value="other">Other</option>
             </select>
 
-            <label>Upload Pictures (Optional - Max 2)</label>
+            <label for="images">Upload Pictures (Optional - Max 2)</label>
             <input type="file" id="images" accept="image/*" multiple>
 
-            <label>Project Description</label>
+            <label for="description">Project Description</label>
             <textarea id="description" rows="4" required></textarea>
 
             <button type="submit">Submit Request</button>

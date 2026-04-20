@@ -22,13 +22,11 @@ request.onsuccess = function(event) {
 // On error, we log the error to the console.
 
 request.onerror = function() {
-    console.log("Database error");
+    console.error("Database error");
 };
 
 // Form submission handler to save the request data to IndexedDB.
 // It also handles image uploads and converts them to base64 format for storage.
-
- // document.getElementById("requestForm").addEventListener("submit", async function(e){
 const form = document.getElementById("requestForm");
 if (form) {
     form.addEventListener("submit", async function(e){

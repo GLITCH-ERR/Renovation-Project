@@ -54,10 +54,7 @@ export function clearRequests() {
     const tx = db.transaction("requests", "readwrite");
     const store = tx.objectStore("requests");
 
-    const clearRequest = store.clear();
-
-    clearRequest.onsuccess = function() {
-        console.log("All requests cleared");
-    };
+    store.clear();
+    
 
 }
