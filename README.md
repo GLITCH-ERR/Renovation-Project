@@ -28,6 +28,8 @@ Visit http://localhost:4040
 
 ## Deployed URL
 
+https://glitch-err.github.io/Renovation-Project/
+
 ## Module Map
 - `main.js` — initializes app and wires event listeners
 - `api.js` — handles data fetching, validation, and IndexedDB utilities
