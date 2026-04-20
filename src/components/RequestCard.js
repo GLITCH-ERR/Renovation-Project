@@ -43,6 +43,11 @@ export function RequestCard({ request, onContact }) {
     emailEl.style.color = "#1a1a1a";
     emailEl.style.wordBreak = "break-all";
 
+    const category = document.createElement("p");
+    category.textContent = request.category;
+    category.style.fontSize = "0.7rem";
+    category.style.color = "#1a1a1a";
+
     const btn = document.createElement("button");
     btn.className = "btn-contact";
     btn.textContent = "Contact";
@@ -52,7 +57,7 @@ export function RequestCard({ request, onContact }) {
         btn.textContent = showing ? "Contact" : "Hide Contact";
     };
 
-    body.append(title, desc, btn, emailEl);
+    body.append(title, category, desc, btn, emailEl);
     card.append(imageDiv, body);
 
     return card;
